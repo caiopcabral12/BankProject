@@ -8,13 +8,16 @@ import (
 )
 
 func Menu() {
-	fmt.Println("What do you want?")
+
+	fmt.Println()
+	fmt.Println("Hello !")
 	fmt.Println("")
 
 	fmt.Println("1 - Deposit")
 	fmt.Println("2 - Withdraw")
 	fmt.Println("3 - Transfer")
-	fmt.Println("4 - Exit")
+	fmt.Println("4 - Pay Bill")
+	fmt.Println("5 - Exit")
 }
 
 func Options() int {
@@ -37,9 +40,6 @@ func main() {
 		AgencyNumber:  1,
 		//Balance:       100.1
 	}
-
-	caioAccount.Deposit(100)
-	fmt.Println(caioAccount.seeBalance())
 
 	byaProfile := costumers.Costumers{
 		Name: "Bya",
@@ -88,14 +88,21 @@ func main() {
 
 			fmt.Println(caioAccount.Transfer(transferValue, &byaAccount))
 
-		//	fmt.Println(byaAccount.seeBalance())
-
 		case 4:
+
+			fmt.Println("Type the bill cost:")
+			var billValue float64
+
+			fmt.Scan(&billValue)
+			caioAccount.Deposit(100)
+			caioAccount.PayBills(&caioAccount, billValue)
+			fmt.Println(caioAccount.SeeBalance())
+		case 5:
 			fmt.Println("See you later")
 			os.Exit(0)
 
 		default:
-			fmt.Printf("Unknown command! Choose a number between 1 and 3")
+			fmt.Printf("Unknown command! Choose a number between 1 and 5")
 		}
 
 	}
